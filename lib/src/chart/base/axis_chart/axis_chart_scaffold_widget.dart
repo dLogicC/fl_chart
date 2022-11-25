@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:fl_chart/src/chart/base/axis_chart/side_titles/side_titles_widget.dart';
 import 'package:fl_chart/src/extensions/fl_titles_data_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 /// A scaffold to show an axis-based chart
 ///
@@ -19,6 +20,10 @@ import 'package:flutter/material.dart';
 /// `left`, `top`, `right`, `bottom` are some place holders to show titles
 /// provided by [AxisChartData.titlesData] around the chart
 /// `chart` is a centered place holder to show a raw chart.
+///
+
+final scollBarController = ScrollController();
+
 class AxisChartScaffoldWidget extends StatelessWidget {
   const AxisChartScaffoldWidget({
     super.key,
@@ -67,23 +72,19 @@ class AxisChartScaffoldWidget extends StatelessWidget {
   }
 
   List<Widget> stackWidgets(BoxConstraints constraints) {
-    ScrollController scollBarController = ScrollController();
     final widgets = <Widget>[
       Container(
-          margin: data.titlesData.allSidesPadding,
-          decoration: BoxDecoration(
-            border: data.borderData.isVisible() ? data.borderData.border : null,
-          ),
-          child: Scrollbar(
-              controller: scollBarController,
-              child: SingleChildScrollView(
-                controller: scollBarController,
-                scrollDirection: Axis.horizontal,
-                child: Container(
-                  width: chartWidth,
-                  child: chart,
-                ),
-              )))
+        margin: data.titlesData.allSidesPadding,
+        decoration: BoxDecoration(
+          border: data.borderData.isVisible() ? data.borderData.border : null,
+        ),
+        child: Scrollable(
+          controller: scollBarController,
+          viewportBuilder: (BuildContext context, ViewportOffset position) {
+            return SizedBox(width: chartWidth, child: chart);
+          },
+        ),
+      )
     ];
 
     int insertIndex(bool drawBelow) => drawBelow ? 0 : widgets.length;

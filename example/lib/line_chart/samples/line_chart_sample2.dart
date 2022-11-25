@@ -170,7 +170,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
     return LineChartData(
       chartWidth: 800,
       lineTouchData: LineTouchData(handleBuiltInTouches: false),
-      clipData: FlClipData.all(),
+      //clipData: FlClipData.all(),
       gridData: FlGridData(
         show: true,
         drawVerticalLine: true,
@@ -218,7 +218,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
         show: true,
         border: Border.all(color: const Color(0xff37434d)),
       ),
-      minX: 0,
+      minX: 1,
       maxX: 5,
       minY: 0,
       maxY: 6,

@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: SafeArea(
         child: PageView(
-          physics: const NeverScrollableScrollPhysics(),
+          //physics: const NeverScrollableScrollPhysics(),
           controller: _controller,
           children: _pages,
         ),
