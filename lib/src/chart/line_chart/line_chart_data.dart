@@ -42,6 +42,7 @@ class LineChartData extends AxisChartData with EquatableMixin {
   ///
   /// [clipData] forces the [LineChart] to draw lines inside the chart bounding box.
   LineChartData({
+    double? chartWidth,
     List<LineChartBarData>? lineBarsData,
     List<BetweenBarsData>? betweenBarsData,
     FlTitlesData? titlesData,
@@ -59,7 +60,8 @@ class LineChartData extends AxisChartData with EquatableMixin {
     super.baselineY,
     FlClipData? clipData,
     super.backgroundColor,
-  })  : lineBarsData = lineBarsData ?? const [],
+  })  : chartWidth = chartWidth ?? 0,
+        lineBarsData = lineBarsData ?? const [],
         betweenBarsData = betweenBarsData ?? const [],
         extraLinesData = extraLinesData ?? ExtraLinesData(),
         lineTouchData = lineTouchData ?? LineTouchData(),
@@ -100,6 +102,9 @@ class LineChartData extends AxisChartData with EquatableMixin {
   /// on top of each [LineChartBarData.spots] using [showingTooltipIndicators],
   /// just put line indicator number and spots indices you want to show it on top of them.
   final List<ShowingTooltipIndicators> showingTooltipIndicators;
+
+  /// Width of the scrollable chart
+  final double? chartWidth;
 
   /// Lerps a [BaseChartData] based on [t] value, check [Tween.lerp].
   @override

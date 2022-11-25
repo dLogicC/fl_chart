@@ -58,6 +58,7 @@ class _LineChartState extends AnimatedWidgetBaseState<LineChart> {
         key: widget.chartRendererKey,
       ),
       data: showingData,
+      chartWidth: widget.data.chartWidth!,
     );
   }
 

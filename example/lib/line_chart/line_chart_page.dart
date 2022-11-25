@@ -9,46 +9,9 @@ class LineChartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ColoredBox(
       color: const Color(0xff262545),
-      child: ListView(
-        children: const <Widget>[
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: EdgeInsets.only(
-                left: 36,
-                top: 24,
-              ),
-              child: Text(
-                'Line Chart',
-                style: TextStyle(
-                  color: Color(
-                    0xff6f6f97,
-                  ),
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 8,
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              left: 28,
-              right: 28,
-            ),
-            child: LineChartSample1(),
-          ),
-          SizedBox(
-            height: 22,
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 28, right: 28),
-            child: LineChartSample2(),
-          ),
-          SizedBox(height: 22),
-        ],
+      child: Padding(
+        padding: EdgeInsets.only(left: 28, right: 28),
+        child: LineChartSample2(),
       ),
     );
   }

@@ -32,6 +32,7 @@ class BarChartData extends AxisChartData with EquatableMixin {
   ///
   /// You can modify [barTouchData] to customize touch behaviors and responses.
   BarChartData({
+    double? chartWidth,
     List<BarChartGroupData>? barGroups,
     double? groupsSpace,
     BarChartAlignment? alignment,
@@ -44,7 +45,8 @@ class BarChartData extends AxisChartData with EquatableMixin {
     super.borderData,
     RangeAnnotations? rangeAnnotations,
     super.backgroundColor,
-  })  : barGroups = barGroups ?? const [],
+  })  : chartWidth = chartWidth ?? 0,
+        barGroups = barGroups ?? const [],
         groupsSpace = groupsSpace ?? 16,
         alignment = alignment ?? BarChartAlignment.spaceEvenly,
         barTouchData = barTouchData ?? BarTouchData(),
@@ -79,6 +81,9 @@ class BarChartData extends AxisChartData with EquatableMixin {
 
   /// Handles touch behaviors and responses.
   final BarTouchData barTouchData;
+
+  /// Width of the scrollable chart
+  final double? chartWidth;
 
   /// Copies current [BarChartData] to a new [BarChartData],
   /// and replaces provided values.

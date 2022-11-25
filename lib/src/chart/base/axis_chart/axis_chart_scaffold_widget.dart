@@ -24,9 +24,11 @@ class AxisChartScaffoldWidget extends StatelessWidget {
     super.key,
     required this.chart,
     required this.data,
+    required this.chartWidth,
   });
   final Widget chart;
   final AxisChartData data;
+  final double chartWidth;
 
   bool get showLeftTitles {
     if (!data.titlesData.show) {
@@ -65,14 +67,23 @@ class AxisChartScaffoldWidget extends StatelessWidget {
   }
 
   List<Widget> stackWidgets(BoxConstraints constraints) {
+    ScrollController scollBarController = ScrollController();
     final widgets = <Widget>[
       Container(
-        margin: data.titlesData.allSidesPadding,
-        decoration: BoxDecoration(
-          border: data.borderData.isVisible() ? data.borderData.border : null,
-        ),
-        child: chart,
-      )
+          margin: data.titlesData.allSidesPadding,
+          decoration: BoxDecoration(
+            border: data.borderData.isVisible() ? data.borderData.border : null,
+          ),
+          child: Scrollbar(
+              controller: scollBarController,
+              child: SingleChildScrollView(
+                controller: scollBarController,
+                scrollDirection: Axis.horizontal,
+                child: Container(
+                  width: chartWidth,
+                  child: chart,
+                ),
+              )))
     ];
 
     int insertIndex(bool drawBelow) => drawBelow ? 0 : widgets.length;

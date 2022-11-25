@@ -1,6 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
+late double minX, maxX, scale;
+
 class LineChartSample2 extends StatefulWidget {
   const LineChartSample2({super.key});
 
@@ -17,30 +19,78 @@ class _LineChartSample2State extends State<LineChartSample2> {
   bool showAvg = false;
 
   @override
+  void initState() {
+    minX = 0;
+    maxX = 11;
+    scale = 1;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
         AspectRatio(
           aspectRatio: 1.70,
           child: DecoratedBox(
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(
-                Radius.circular(18),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(18),
+                ),
+                color: Color(0xff232d37),
               ),
-              color: Color(0xff232d37),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(
-                right: 18,
-                left: 12,
-                top: 24,
-                bottom: 12,
-              ),
-              child: LineChart(
-                showAvg ? avgData() : mainData(),
-              ),
-            ),
-          ),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  right: 18,
+                  left: 12,
+                  top: 24,
+                  bottom: 12,
+                ),
+                child: /*GestureDetector(
+                  onScaleUpdate: (details) {
+                    print(details);
+                    if (details.pointerCount > 1) {
+                      if (details.scale > scale) {
+                        minX += maxX * 0.005;
+                        maxX -= maxX * 0.005;
+                        scale = details.scale;
+                        if (minX >= 0 && maxX <= 11) {
+                          setState(() {});
+                        }
+                      } else {
+                        minX -= maxX * 0.005;
+                        maxX += maxX * 0.005;
+                        scale = details.scale;
+                        if (minX >= 0 && maxX <= 11) {
+                          setState(() {});
+                        }
+                      }
+                    }
+                  },
+                  onHorizontalDragUpdate: (dragUpdDet) {
+                    print(dragUpdDet.primaryDelta);
+                    double primDelta = dragUpdDet.primaryDelta ?? 0.0;
+                    if (primDelta != 0) {
+                      if (primDelta.isNegative) {
+                        minX += maxX * 0.005;
+                        maxX += maxX * 0.005;
+                        if (minX >= 0 && maxX <= 11) {
+                          setState(() {});
+                        }
+                      } else {
+                        minX -= maxX * 0.005;
+                        maxX -= maxX * 0.005;
+                        if (minX >= 0 && maxX <= 11) {
+                          setState(() {});
+                        }
+                      }
+                    }
+                  },
+                  child: */
+                    LineChart(
+                  showAvg ? avgData() : mainData(),
+                ),
+              )),
         ),
         SizedBox(
           width: 60,
@@ -118,6 +168,9 @@ class _LineChartSample2State extends State<LineChartSample2> {
 
   LineChartData mainData() {
     return LineChartData(
+      chartWidth: 800,
+      lineTouchData: LineTouchData(handleBuiltInTouches: false),
+      clipData: FlClipData.all(),
       gridData: FlGridData(
         show: true,
         drawVerticalLine: true,
@@ -166,7 +219,7 @@ class _LineChartSample2State extends State<LineChartSample2> {
         border: Border.all(color: const Color(0xff37434d)),
       ),
       minX: 0,
-      maxX: 11,
+      maxX: 5,
       minY: 0,
       maxY: 6,
       lineBarsData: [

@@ -55,6 +55,7 @@ class _BarChartState extends AnimatedWidgetBaseState<BarChart> {
         targetData: _withTouchedIndicators(showingData),
         key: widget.chartRendererKey,
       ),
+      chartWidth: widget.data.chartWidth!,
     );
   }
 

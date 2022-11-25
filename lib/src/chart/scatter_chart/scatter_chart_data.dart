@@ -34,6 +34,7 @@ class ScatterChartData extends AxisChartData with EquatableMixin {
   ///
   /// [clipData] forces the [LineChart] to draw lines inside the chart bounding box.
   ScatterChartData({
+    double? chartWidth,
     List<ScatterSpot>? scatterSpots,
     FlTitlesData? titlesData,
     ScatterTouchData? scatterTouchData,
@@ -49,7 +50,8 @@ class ScatterChartData extends AxisChartData with EquatableMixin {
     FlClipData? clipData,
     super.backgroundColor,
     ScatterLabelSettings? scatterLabelSettings,
-  })  : scatterSpots = scatterSpots ?? const [],
+  })  : chartWidth = chartWidth ?? 0,
+        scatterSpots = scatterSpots ?? const [],
         scatterTouchData = scatterTouchData ?? ScatterTouchData(),
         showingTooltipIndicators = showingTooltipIndicators ?? const [],
         scatterLabelSettings = scatterLabelSettings ?? ScatterLabelSettings(),
@@ -79,6 +81,7 @@ class ScatterChartData extends AxisChartData with EquatableMixin {
   final ScatterTouchData scatterTouchData;
   final List<int> showingTooltipIndicators;
   final ScatterLabelSettings scatterLabelSettings;
+  final double chartWidth;
 
   /// Lerps a [ScatterChartData] based on [t] value, check [Tween.lerp].
   @override
